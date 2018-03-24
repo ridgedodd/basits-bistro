@@ -1,8 +1,15 @@
 <html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="bootstrap-4.0.0-dist/js/jquery-1.11.3.min.js"></script>
+<script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+</head>
 <body>
-<h1>Menu</h1>
-<h2>Apps</h2>
-<table border="0" cellspacing="2" cellpadding="2">
+<div class="container-fluid">
+<h1 class="text-center">Menu</h1>
+<h2 class="text-center">Apps</h2>
+<table>
 <?php
 	require_once('./library.php');
 	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
@@ -30,8 +37,8 @@
 	 }
 		?>
 </table>
-<h2>Entrees</h2>
-<table border="0" cellspacing="2" cellpadding="2">
+<h2 class="text-center">Entrees</h2>
+<table>
 	<?php
 	// Form the SQL query (a SELECT query)
 	 $sql="SELECT * FROM Food where category='Entree'";
@@ -51,8 +58,8 @@
 	 }
 		?>
 </table>
-<h2>Sides</h2>
-<table border="0" cellspacing="2" cellpadding="2">
+<h2 class="text-center">Sides</h2>
+<table>
 	<?php
 	// Form the SQL query (a SELECT query)
 	 $sql="SELECT * FROM Food where category='Side'";
@@ -72,8 +79,8 @@
 	 }
 		?>
 </table>
-<h2>Drinks</h2>
-<table border="0" cellspacing="2" cellpadding="2">
+<h2 class="text-center">Drinks</h2>
+<table>
 	<?php
 	// Form the SQL query (a SELECT query)
 	 $sql="SELECT * FROM Food where category='Drink'";
@@ -93,6 +100,7 @@
 	 }
 		?>
 </table>
+</div>
 <?php
 	mysqli_close($con);
 	?>

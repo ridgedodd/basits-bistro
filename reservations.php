@@ -1,24 +1,24 @@
 <html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="bootstrap-4.0.0-dist/js/jquery-1.11.3.min.js"></script>
+<script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+</head>
 <body>
+<div class="container-fluid">
 <h1>Reservations</h1>
-<table border="0" cellspacing="2" cellpadding="2">
-<tr>
-<td align="center">
-Reservation #
-</td>
-<td align="center">
-Customer
-</td>
-<td align="center">
-Date
-</td>
-<td align="center">
-Num People
-</td>
-<td align="center">
-Table Num
-</td>
-</tr>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="text-center">Reservation #</th>
+			<th class="text-center">Customer</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Num People</th>
+			<th class="text-center">Table Num</th>
+		</tr>
+	</thead>
+	<tbody>
 <?php
 	require_once('./library.php');
 	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
@@ -55,7 +55,9 @@ Table Num
 		}
 	mysqli_close($con);
 	?>
+	</tbody>
 </table>
+</div>
 
 </body>
 </html>
