@@ -1,9 +1,21 @@
 <html>
 <head>
+<!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<!-- jQuery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="bootstrap-4.0.0-dist/js/jquery-1.11.3.min.js"></script>
 <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+<!-- font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -57,7 +69,10 @@
 	?>
 	</tbody>
 </table>
-</div>
 
+<h2>Make a Reservation</h2>
+<p>Date: <input type="text" id="datepicker"></p>
+
+</div>
 </body>
 </html>
