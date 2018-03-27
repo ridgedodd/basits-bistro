@@ -10,8 +10,16 @@
 <body>
 <div class="container-fluid">
 <h1 class="text-center">Menu</h1>
+<div class="row">
+<div class="col-sm-6">
 <h2 class="text-center">Apps</h2>
 <?php
+	session_start();
+	//Checking User Logged or Not
+	if(empty($_SESSION['role'])){
+	 header('location:index.php');
+	}
+	
 	require_once('./library.php');
 	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	 // Check connection
@@ -64,7 +72,8 @@
 		<?php
 	 }
 		?>
-
+</div> <!-- end of first column -->
+<div class="col-sm-6">
 <h2 class="text-center">Sides</h2>
 	<?php
 	// Form the SQL query (a SELECT query)
@@ -102,6 +111,8 @@
 		<?php
 	 }
 		?>
+</div> <!-- end of second column -->
+</div> 
 	<p class="text-center"><i class="fa fa-pagelines"></i> - Vegetarian </p>
 </div>
 <?php

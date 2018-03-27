@@ -8,6 +8,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<?php
+session_start();
+//Checking User Logged or Not
+if(empty($_SESSION['role'])){
+ header('location:index.php');
+}
+
+?>
 <div class="container-fluid">
 <h1>Welcome to Basit's Bistro!</h1>
 <p>Work in progress...</p>
@@ -16,6 +24,9 @@
 </form>
 <form action="reservations.php">
     <input type="submit" value="View or Make Reservations" />
+</form>
+<form action="logout.php">
+    <input type="submit" value="Log Out" />
 </form>
 </div>
 

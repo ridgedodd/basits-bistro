@@ -32,6 +32,12 @@
 	</thead>
 	<tbody>
 <?php
+	session_start();
+	//Checking User Logged or Not
+	if(empty($_SESSION['role'])){
+	 header('location:index.php');
+	}
+	
 	require_once('./library.php');
 	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	 // Check connection
