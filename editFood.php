@@ -7,6 +7,9 @@
 
 	require_once('./library-manager.php');
 	$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
+	$error = "";
+	
 	// Check connection
 	if (mysqli_connect_errno()) {
 		echo("Can't connect to MySQL Server. Error code: " .

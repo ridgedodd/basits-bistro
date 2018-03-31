@@ -80,15 +80,21 @@ $(document).ready(function(){
 			<?php
 		}
 		?>
+
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
 		  <i class="fa fa-pencil" style="color:white"></i>
 		</button>
-		</form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
-		<button type="button" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?>>
+		</form>
+
+		<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+		<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
 		  <i class="fa fa-trash" style="color:white"></i>
-		</button>
+		</button>	
+		</form>
+
 		</p>
+
 		<?php
 	 }
 		?>
@@ -112,11 +118,19 @@ $(document).ready(function(){
 			<?php
 		}
 		?>
+
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
 		  <i class="fa fa-pencil" style="color:white"></i>
 		</button>
 		</form>
+
+		<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+		<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
+		  <i class="fa fa-trash" style="color:white"></i>
+		</button>	
+		</form>
+
 		</p>
 		<?php
 	 }
@@ -141,11 +155,19 @@ $(document).ready(function(){
 			<?php
 		}
 		?>
+
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
 		  <i class="fa fa-pencil" style="color:white"></i>
 		</button>
 		</form>
+
+		<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+		<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
+		  <i class="fa fa-trash" style="color:white"></i>
+		</button>	
+		</form>		
+
 		</p>
 		<?php
 	 }
@@ -161,11 +183,19 @@ $(document).ready(function(){
 		<p class="text-center" style="display: inline-block">
 		<?php echo $row['food_name']; ?>
 		$<?php echo $row['price']?>
+
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
 		  <i class="fa fa-pencil" style="color:white"></i>
 		</button>
 		</form>
+
+		<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+		<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
+		  <i class="fa fa-trash" style="color:white"></i>
+		</button>	
+		</form>
+
 		</p>
 		<?php
 	 }
