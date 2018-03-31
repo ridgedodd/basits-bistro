@@ -46,6 +46,7 @@
 			<th class="text-center">Date</th>
 			<th class="text-center">Num People</th>
 			<th class="text-center">Table Num</th>
+            <th class="text-center">Delete?</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -72,19 +73,31 @@
 		 ?>
 		<tr>
 		<td align="center">
-		<?php echo $row['reservationID']; ?>
+			<?php echo $row['reservationID']; ?>
 		</td>
+
 		<td align="center">
-		<?php echo $row['first_name'] . " " . $row['last_name']; ?>
+			<?php echo $row['first_name'] . " " . $row['last_name']; ?>
 		</td>
+
 		<td align="center">
-		<?php echo $row['dateTime']; ?>
+			<?php echo $row['dateTime']; ?>
 		</td>
+
 		<td align="center">
-		<?php echo $row['num_people']; ?>
+			<?php echo $row['num_people']; ?>
 		</td>
+
 		<td align="center">
-		<?php echo $row['tableID']; ?>
+			<?php echo $row['tableID']; ?>
+		</td>
+
+		<td>
+			<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+				<button type="submit" class="btn btn-danger" name="reservationID" value=<?php echo $row['reservationID']; ?> >
+				    <i class="fa fa-trash" style="color:white"></i>
+				</button>	
+			</form>
 		</td>
 		</tr>
 		<?php
