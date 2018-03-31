@@ -4,7 +4,7 @@ $error='';
 
 if(isset($_POST['username']) && isset($_POST['password'])) {
 	
-	require_once('./library.php');
+	require('./library-manager.php');
 	$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	// Check connection
 	if (mysqli_connect_errno()) {
@@ -22,6 +22,23 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	if($count==1){
 		$row=mysqli_fetch_array($result);
 		$_SESSION['role'] = $row['role'];
+		if ($_SESSION['role'] == "manager") {
+			
+		}
+		elseif ($_SESSION['role'] == "waiter") {
+			require('./library-waiter.php');
+		}
+		elseif ($_SESSION['role'] == "chef") {
+			require('./library-chef.php');
+		}
+		elseif ($_SESSION['role'] == "host") {
+			require('./library-host.php');
+		}
+		$_SESSION['dbServer'] = $SERVER;
+		$_SESSION['dbUsername'] = $USERNAME;
+		$_SESSION['dbPassword'] = $PASSWORD;
+		$_SESSION['dbDatabase'] = $DATABASE;
+		
 		header('location:home.php');
 	}
 	else {
@@ -31,8 +48,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	mysqli_close($con);
 	
 	
-	#$_SESSION['role'] = 'role1';
-	#header('location:home.php');
+	
 }
 
 

@@ -17,7 +17,25 @@
   } );
   </script>
 </head>
-<body>
+<body style="padding-top:70px">
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+<!-- Brand/logo -->
+  <a class="navbar-brand" href="home.php">Basit's Bistro</a>
+  <!-- Links -->
+  
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="menu.php">Menu</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="reservations.php">Reservations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="logout.php">Log Out</a>
+    </li>
+  </ul>
+  
+</nav>
 <div class="container-fluid">
 <h1>Reservations</h1>
 <table class="table table-striped">
@@ -38,7 +56,7 @@
 	 header('location:index.php');
 	}
 	
-	require_once('./library.php');
+	require_once('./library-manager.php');
 	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	 // Check connection
 	 if (mysqli_connect_errno()) {

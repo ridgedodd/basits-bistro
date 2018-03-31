@@ -12,6 +12,23 @@ include('login.php');
 </head>
 <body>
 <div class="container">
+<div class="row">
+<div class="col-md-4 mx-auto">
+<?php
+	if(isset($_GET['loggedOut'])) {
+		$loggedOut = $_GET['loggedOut'];
+		if ($loggedOut == 1) {
+			?>
+			<br/>
+			<div class="alert alert-success">
+				You have successfully logged out.
+			</div>
+			<br/>
+			<?php
+		}
+	}
+?>
+
 <form method="post" action="">
   <div class="form-group">
     <label for="username">Username:</label>
@@ -23,9 +40,20 @@ include('login.php');
   </div>
   <button type="submit" name="login" class="btn btn-primary">Login</button>
   <div>
-  <?php echo $error; ?>
+  <?php 
+	if ($error != '') {
+	 ?>
+	 <br/>
+	 <div class="alert alert-danger">
+		<?php echo $error; ?>
+	</div>
+	<?php
+	}
+?>
   </div>
 </form>
-</div>
+</div> <!-- col -->
+</div> <!-- row -->
+</div> <!-- container -->
 </body>
 </html>
