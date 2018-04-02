@@ -34,7 +34,8 @@
 		$currentFoodID = $_SESSION['currentFoodIDToEdit'];
 		$_SESSION['currentFoodIDToEdit'] = '';
 
-		$sql="DELETE FROM Food WHERE foodID=$currentFoodID";
+		#$sql="DELETE FROM Food WHERE foodID=$currentFoodID";
+		$sql = "UPDATE Food SET active = 0 WHERE foodID=$currentFoodID";
 		
 		if (mysqli_query($con, $sql)) {
 				

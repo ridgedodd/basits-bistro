@@ -12,9 +12,30 @@
 <!-- font awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+$( function() {
+	$( "#datepicker" ).datepicker();
+} );
+ 
+/*
+$(document).ready(function(){
+	$('#reservationSpecs :input').change(function() {
+		var show_check = true;
+		$("#reservationSpecs :input").each(function() {
+			if ($(this).val() === "") {
+				show_check = false;
+			}
+		});
+		if (show_check) {
+			$("#checkBtn").show();
+		}
+		else {
+			$("#checkBtn").hide();
+		}
+	});		
+});
+*/
+
+  
   </script>
 </head>
 <body style="padding-top:70px">
@@ -57,8 +78,7 @@
 	 header('location:index.php');
 	}
 	
-	require_once('./library-manager.php');
-	 $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+	$con = new mysqli($_SESSION['dbServer'], $_SESSION['dbUsername'], $_SESSION['dbPassword'], $_SESSION['dbDatabase']);
 	 // Check connection
 	 if (mysqli_connect_errno()) {
 		 echo("Can't connect to MySQL Server. Error code: " .
@@ -102,14 +122,139 @@
 		</tr>
 		<?php
 		}
-	mysqli_close($con);
 	?>
 	</tbody>
 </table>
-
+<form id="reservationSpecs" method="post" action="">
 <h2>Make a Reservation</h2>
-<p>Date: <input type="text" id="datepicker"></p>
+<p>Date: <input type="text" id="datepicker" name="date" value="<?php echo $_POST['date']; ?>"></p>
+<p># of People: <input type="number" id="numPeople" name="numPeople" value="<?php echo $_POST['numPeople']; ?>"></p>
+<button type="submit" id="checkBtn" name="checkBtn" class="btn btn-primary">Check Availability</button>
+</form>
+
+<?php
+	if(isset($_POST['date']) && isset($_POST['numPeople'])) {
+?>
+
+
+<table class="table table-striped" id="openTable">
+	<thead>
+		<tr>
+			<th class="text-center">12:00</th>
+			<th class="text-center">12:30</th>
+			<th class="text-center">1:00</th>
+			<th class="text-center">1:30</th>
+			<th class="text-center">2:00</th>
+            <th class="text-center">2:30</th>
+			<th class="text-center">3:00</th>
+			<th class="text-center">3:30</th>
+			<th class="text-center">4:00</th>
+			<th class="text-center">4:30</th>
+			<th class="text-center">5:00</th>
+            <th class="text-center">5:30</th>
+			<th class="text-center">6:00</th>
+			<th class="text-center">6:30</th>
+			<th class="text-center">7:00</th>
+			<th class="text-center">7:30</th>
+			<th class="text-center">8:00</th>
+            <th class="text-center">8:30</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		<?php
+			$date = date("Y-m-d", strtotime($_POST['date']));
+			$numPeople = $_POST['numPeople'];
+			
+			for ($x = 0; $x < 18; $x++) {
+				switch ($x) {
+					case 0:
+						$time = "12:00:00"; break;
+					case 1:
+						$time = "12:30:00"; break;
+					case 2:
+						$time = "13:00:00"; break;
+					case 3:
+						$time = "13:30:00"; break;
+					case 4:
+						$time = "14:00:00"; break;
+					case 5:
+						$time = "14:30:00"; break;
+					case 6:
+						$time = "15:00:00"; break;
+					case 7:
+						$time = "15:30:00"; break;
+					case 8:
+						$time = "16:00:00"; break;
+					case 9:
+						$time = "16:30:00"; break;
+					case 10:
+						$time = "17:00:00"; break;
+					case 11:
+						$time = "17:30:00"; break;
+					case 12:
+						$time = "18:00:00"; break;
+					case 13:
+						$time = "18:30:00"; break;
+					case 14:
+						$time = "19:00:00"; break;
+					case 15:
+						$time = "19:30:00"; break;
+					case 16:
+						$time = "20:00:00"; break;
+					case 17:
+						$time = "20:30:00"; break;
+				}
+				
+				$sql = "SELECT * FROM RestaurantTable WHERE seats >= $numPeople AND 
+				NOT EXISTS (SELECT * FROM Reservation WHERE RestaurantTable.tableID 
+				= Reservation.tableID AND DATE(dateTime) = '$date' AND TIME(dateTime) = '$time') ORDER BY seats";
+			
+				$result = mysqli_query($con,$sql);
+				$count=mysqli_num_rows($result);
+				
+				?>
+				<td align="center">
+				<?php
+				if($count==0){
+					?>
+					<button type="button" class="btn btn-danger disabled">
+					<i class="fa fa-times" style="color:white"></i>
+					</button>
+					<?php
+				}
+				else {
+					$row=mysqli_fetch_array($result);
+					$tableNum = $row['tableID'];
+					?>
+					
+					<form action="confirmReservation.php" method="post">
+						<input type="hidden" name="date" value="<?php echo $date; ?>" />
+						<input type="hidden" name="time" value="<?php echo $time; ?>" />
+						<input type="hidden" name="numPeople" value="<?php echo $numPeople; ?>" />
+						<input type="hidden" name="tableNum" value="<?php echo $tableNum; ?>" />
+						<button type="submit" class="btn btn-success">
+						<i class="fa fa-check-circle" style="color:white"></i>
+						</button>
+					</form>
+					<?php
+				}
+				?>
+				</td>
+				<?php
+			}
+		?>
+		</tr>
+	</tbody>
+</table>
+
+<?php
+	}
+?>
 
 </div>
+<?php
+mysqli_close($con);
+?>
 </body>
 </html>
