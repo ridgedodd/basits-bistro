@@ -37,6 +37,9 @@ $(document).ready(function(){
     <li class="nav-item">
       <a class="nav-link" href="reservations.php">Reservations</a>
     </li>
+	<li class="nav-item">
+      <a class="nav-link" href="newOrder.php">New Order</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="logout.php">Log Out</a>
     </li>
@@ -46,7 +49,7 @@ $(document).ready(function(){
 <div class="container-fluid">
 <h1 class="text-center">Menu</h1>
 <div class="row">
-<div class="col-md-4 mx-auto">
+<div class="col-md-6 mx-auto">
 <div class="row">
 <div class="col-6">
 <h2 class="text-center">Apps</h2>
@@ -70,6 +73,7 @@ $(document).ready(function(){
 	 // Print the data from the table row by row
 	 while($row = mysqli_fetch_array($result)) {
 		?>
+		<div style="text-align:center">
 		<p class="text-center" style="display: inline-block">
 		<?php echo $row['food_name']; ?>
 		$<?php echo $row['price']?>
@@ -79,26 +83,33 @@ $(document).ready(function(){
 			<i class="fa fa-pagelines"></i>
 			<?php
 		}
+		
+		if ($_SESSION['role'] == "manager" || $_SESSION['role'] == "chef") {
+			
+		?>
+			<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
+			<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
+			  <i class="fa fa-pencil" style="color:white"></i>
+			</button>
+			</form>
+
+			<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
+			<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
+			  <i class="fa fa-trash" style="color:white"></i>
+			</button>	
+			</form>
+		
+		<?php
+		}
 		?>
 
-		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
-		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
-		  <i class="fa fa-pencil" style="color:white"></i>
-		</button>
-		</form>
-
-		<form method="post" action="deleteFood.php" style="display: inline-block; padding-left:5px">
-		<button type="submit" class="btn btn-danger" name="foodID" value=<?php echo $row['foodID']; ?> >
-		  <i class="fa fa-trash" style="color:white"></i>
-		</button>	
-		</form>
-
 		</p>
+		</div>
 
 		<?php
 	 }
 		?>
-</table>
+
 <h2 class="text-center">Entrees</h2>
 
 	<?php
@@ -108,6 +119,7 @@ $(document).ready(function(){
 	 // Print the data from the table row by row
 	 while($row = mysqli_fetch_array($result)) {
 		?>
+		<div style="text-align:center">
 		<p class="text-center" style="display: inline-block">
 		<?php echo $row['food_name']; ?>
 		$<?php echo $row['price']?>
@@ -117,7 +129,11 @@ $(document).ready(function(){
 			<i class="fa fa-pagelines"></i>
 			<?php
 		}
+		
+		if ($_SESSION['role'] == "manager" || $_SESSION['role'] == "chef") {
+			
 		?>
+		
 
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
@@ -130,8 +146,12 @@ $(document).ready(function(){
 		  <i class="fa fa-trash" style="color:white"></i>
 		</button>	
 		</form>
+		<?php
+		}
+		?>
 
 		</p>
+		</div>
 		<?php
 	 }
 		?>
@@ -145,6 +165,7 @@ $(document).ready(function(){
 	 // Print the data from the table row by row
 	 while($row = mysqli_fetch_array($result)) {
 		?>
+		<div style="text-align:center">
 		<p class="text-center" style="display: inline-block">
 		<?php echo $row['food_name']; ?>
 		$<?php echo $row['price']?>
@@ -154,6 +175,8 @@ $(document).ready(function(){
 			<i class="fa fa-pagelines"></i>
 			<?php
 		}
+		
+		if ($_SESSION['role'] == "manager" || $_SESSION['role'] == "chef") {
 		?>
 
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
@@ -168,7 +191,11 @@ $(document).ready(function(){
 		</button>	
 		</form>		
 
+		<?php
+		}
+		?>
 		</p>
+		</div>
 		<?php
 	 }
 		?>
@@ -180,9 +207,14 @@ $(document).ready(function(){
 	 // Print the data from the table row by row
 	 while($row = mysqli_fetch_array($result)) {
 		?>
+		<div style="text-align:center">
 		<p class="text-center" style="display: inline-block">
 		<?php echo $row['food_name']; ?>
 		$<?php echo $row['price']?>
+		
+		<?php
+		if ($_SESSION['role'] == "manager" || $_SESSION['role'] == "chef") {
+		?>
 
 		<form method="post" action="editFood.php" style="display: inline-block; padding-left:5px">
 		<button type="submit" class="btn btn-primary" name="foodID" value=<?php echo $row['foodID']; ?> >
@@ -195,8 +227,12 @@ $(document).ready(function(){
 		  <i class="fa fa-trash" style="color:white"></i>
 		</button>	
 		</form>
+		<?php
+		}
+		?>
 
 		</p>
+		</div>
 		<?php
 	 }
 		?>
@@ -205,49 +241,56 @@ $(document).ready(function(){
 </div> <!-- end of centered column -->
 </div>  <!-- end of menu row -->
 	<p class="text-center"><i class="fa fa-pagelines"></i> - Vegetarian </p>
-	<div class="row">
-	<div class="col-md-2 mx-auto">
-		<div style="text-align:center">
-		<button type="button" class="btn btn-primary" id="toggleAddButton">Add Menu Item</button>
-		</div>
-		<form id="addForm" style="display:none" method="post" action="addMenuItem.php">
-			<label for="name">Food Name:</label>
-			<input type="text" class="form-control" id="name" name="fName">
-			<div class="form-group">
-				<label for="category">Category:</label>
-				<select class="form-control" id="category" name="fCategory">
-					<option>Appetizer</option>
-					<option>Entree</option>
-					<option>Side</option>
-					<option>Drink</option>
-				</select>
-			</div>
-			<label for="price">Price:</label>
-			<input type="number" step="1" class="form-control" id="price" name="fPrice">
-			<div class="form-check">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="veg" name="fVeg" value="Yes">Vegetarian?
-				</label>
-			</div>
+	
+	<?php
+		if ($_SESSION['role'] == "manager" || $_SESSION['role'] == "chef") {
+	?>
+		<div class="row">
+		<div class="col-md-2 mx-auto">
 			<div style="text-align:center">
-			<button type="submit" class="btn btn-primary" name="addItem">Add to Menu</button>
-			<button class="btn btn-danger" id="cancelAdd">Cancel</button>
+			<button type="button" class="btn btn-primary" id="toggleAddButton">Add Menu Item</button>
 			</div>
-		</form>
-		<div>
-			<?php if (!empty($_SESSION['addItemError'])) {
-				?>
-				<div class="alert alert-danger">
-				  <?php
-					echo $_SESSION['addItemError'];
-				  ?>
+			<form id="addForm" style="display:none" method="post" action="addMenuItem.php">
+				<label for="name">Food Name:</label>
+				<input type="text" class="form-control" id="name" name="fName">
+				<div class="form-group">
+					<label for="category">Category:</label>
+					<select class="form-control" id="category" name="fCategory">
+						<option>Appetizer</option>
+						<option>Entree</option>
+						<option>Side</option>
+						<option>Drink</option>
+					</select>
 				</div>
-			<?php
-			}
-			?>
+				<label for="price">Price:</label>
+				<input type="number" step="1" class="form-control" id="price" name="fPrice">
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="checkbox" id="veg" name="fVeg" value="Yes">Vegetarian?
+					</label>
+				</div>
+				<div style="text-align:center">
+				<button type="submit" class="btn btn-primary" name="addItem">Add to Menu</button>
+				<button class="btn btn-danger" id="cancelAdd">Cancel</button>
+				</div>
+			</form>
+			<div>
+				<?php if (!empty($_SESSION['addItemError'])) {
+					?>
+					<div class="alert alert-danger">
+					  <?php
+						echo $_SESSION['addItemError'];
+					  ?>
+					</div>
+				<?php
+				}
+				?>
+			</div>
 		</div>
-	</div>
-	</div>
+		</div>
+		<?php
+		}
+		?>
 </div> <!-- end of container -->
 <?php
 	mysqli_close($con);

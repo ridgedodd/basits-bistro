@@ -51,6 +51,9 @@ $(document).ready(function(){
     <li class="nav-item active">
       <a class="nav-link" href="reservations.php">Reservations</a>
     </li>
+	<li class="nav-item">
+      <a class="nav-link" href="newOrder.php">New Order</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="logout.php">Log Out</a>
     </li>
@@ -125,7 +128,7 @@ $(document).ready(function(){
 	?>
 	</tbody>
 </table>
-<form id="reservationSpecs" method="post" action="">
+<form id="reservationSpecs" method="post" action="reservations.php#openTable">
 <h2>Make a Reservation</h2>
 <p>Date: <input type="text" id="datepicker" name="date" value="<?php echo $_POST['date']; ?>"></p>
 <p># of People: <input type="number" id="numPeople" name="numPeople" value="<?php echo $_POST['numPeople']; ?>"></p>

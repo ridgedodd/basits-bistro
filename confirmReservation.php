@@ -62,6 +62,9 @@
     <li class="nav-item">
       <a class="nav-link" href="reservations.php">Reservations</a>
     </li>
+	<li class="nav-item">
+      <a class="nav-link" href="newOrder.php">New Order</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="logout.php">Log Out</a>
     </li>
@@ -150,7 +153,7 @@
 	<h3 class="text-center">Search Customer Last Name</h3>	
            
 	<div style="text-align:center">
-	<input id="searchCustomerInput" type="search" placeholder="Customer Last Name">
+	<input id="searchCustomerInput" type="search" class="form-control" placeholder="Customer Last Name">
 	<div id="searchCustomerResult"></div>
 	</div>
 	
@@ -162,6 +165,7 @@
 			<input type="text" class="form-control" id="firstName" name="newCustomerFirstName">
 			<label for="lastName">Last Name:</label>
 			<input type="text" class="form-control" id="lastName" name="newCustomerLastName">
+			<br/>
 			<div style="text-align:center">
 			<button type="submit" class="btn btn-primary" name="newCustomer" value="newCustomer">Confirm Reservation</button>
 			</div>
